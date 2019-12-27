@@ -1,0 +1,10 @@
+com\ampcus\myginniemae\sfpdm\helper\WaitTimes.class
+com\ampcus\myginniemae\sfpdm\config\PortalAccessConfiguration.class
+com\ampcus\myginniemae\sfpdm\config\PoolListScreenConfiguration.class
+com\ampcus\myginniemae\sfpdm\config\PoolDetailsScreenConfigurations.class
+com\ampcus\myginniemae\sfpdm\DeletePoolRunner.class
+com\ampcus\myginniemae\sfpdm\config\TestConfiguration.class
+com\ampcus\myginniemae\sfpdm\AddPoolRunner.class
+com\ampcus\myginniemae\sfpdm\config\DashboardPageConfiguration.class
+com\ampcus\myginniemae\sfpdm\PortalAccessRunner.class
+com\ampcus\myginniemae\sfpdm\config\PortalHeaderConfigurations.class
