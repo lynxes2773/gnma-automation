@@ -60,18 +60,18 @@ public class AddPoolRunner {
 		confirmationPopupCloseIcon.click();
 		
 		System.out.println("Now switching tabs back & forth to kill time....");
-		WebElement dashboardTab = driver.findElementById(PoolListScreenConfiguration.DASHBOARD_TAB_ID);
+		WebElement dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
 		dashboardTab.click();
 
-		poolsAndLoansTab = driver.findElementById(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID);
+		poolsAndLoansTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID)));
 		poolsAndLoansTab.click();
-		dashboardTab = driver.findElementById(PoolListScreenConfiguration.DASHBOARD_TAB_ID);
+		dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
 		dashboardTab.click();
 		
-		poolsAndLoansTab = driver.findElementById(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID);
+		poolsAndLoansTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID)));
 		poolsAndLoansTab.click();
 		
-		dashboardTab = driver.findElementById(PoolListScreenConfiguration.DASHBOARD_TAB_ID);
+		dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
 		dashboardTab.click();
 		waitForPageLoaded(driver);
 		
@@ -90,7 +90,7 @@ public class AddPoolRunner {
 		catch(Exception nsee)
 		{
 			System.out.println("WARNING: Pool link for "+ TestConfiguration.POOL_ID + " NOT found.");
-			System.out.println("Swiyching tabs again to refresh...");
+			System.out.println("Switching tabs again to refresh...");
 			seleniumExceptionTriggered = true;
 		}
 		
@@ -151,7 +151,7 @@ public class AddPoolRunner {
 	public String findByAnchor()
 	{
       WebElement anchor = null;
-      List<WebElement> anchors = driver.findElements(By.tagName("a"));
+      List<WebElement> anchors = driver.findElements(By.tagName("a")); 
       System.out.println("Number of anchors found: "+anchors.size());
       Iterator<WebElement> i = anchors.iterator();
       

@@ -53,7 +53,9 @@ public class PortalAccessRunner {
 		boolean poolCreated = runner.addPool();
 		if(poolCreated)
 		{
-			boolean poolDeleted = runner.deletePool();
+			boolean testCompleted = runner.runTest();
+			System.out.println("Test Completed: "+testCompleted);
+			//boolean poolDeleted = runner.deletePool();
 		}
 	}
 	
@@ -67,6 +69,12 @@ public class PortalAccessRunner {
 	{
 		AddPoolRunner addRunner = new AddPoolRunner(driver);
 		return addRunner.run();
+	}
+	
+	public boolean runTest()
+	{
+		TestRunner test = new TestRunner(driver);
+		return test.run();
 	}
 	
 	public PortalAccessRunner() {
