@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Rohit
- * This is the class that with main() method dtd 04/30/2020
+ * This is the class that with main() method dtd 04/30/2020 for sharing.
  */
 public class PortalAccessRunner {
 
