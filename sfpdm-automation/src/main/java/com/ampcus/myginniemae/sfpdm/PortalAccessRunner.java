@@ -38,6 +38,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Rohit
+ * This is the class that with main() method 
+ */
 public class PortalAccessRunner {
 
 	private PortalAccessConfiguration commonConfig;
