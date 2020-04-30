@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.ampcus.myginniemae.sfpdm.helper.WaitTimes;
 import com.ampcus.myginniemae.sfpdm.config.PortalAccessConfiguration;
@@ -160,10 +161,14 @@ public class PortalAccessRunner {
 		boolean otpRetrievalSuccessful = false;
 		this.setExistingEmailstoRead();
 		
-		WebElement otpByEmailOption = driver.findElementById(PortalAccessConfiguration.OTP_OPTION_EMAIL);
-		otpByEmailOption.click();
-		WebElement okButton = driver.findElementByXPath(PortalAccessConfiguration.OTP_OK_BUTTON_XPATH);
-		okButton.click();
+		System.out.println("Now accessing email to wait for OTP...");
+		
+		WebDriverWait wait = new WebDriverWait(driver, 30, 100);
+		
+//		WebElement otpByEmailOption = wait.until(ExpectedConditions.elementToBeClickable(By.id(PortalAccessConfiguration.OTP_OPTION_EMAIL)));
+//		otpByEmailOption.click();
+//		WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PortalAccessConfiguration.OTP_OK_BUTTON_XPATH)));
+//		okButton.click();
    	    Date otpTime = new Date(System.currentTimeMillis() - (2 * 3600 * 1000));  
    	    
 		sysProps = System.getProperties();

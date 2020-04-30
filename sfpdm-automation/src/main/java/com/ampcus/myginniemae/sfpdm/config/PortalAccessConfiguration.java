@@ -16,7 +16,7 @@ public class PortalAccessConfiguration {
 	public final static String LOGIN_SUBMIT_BUTTON = "submit";
 	
 	public final static String PORTAL_USER_NAME = "george.hunt@ampcusinc.com";
-	public final static String PORTAL_PASSWORD = "Ampcus_123!";
+	public final static String PORTAL_PASSWORD = "Tester@123";
 	
 	public final static String WEBMAIL_URL = "https://webmail.ampcusinc.com";
 	public final static String WEBMAIL_PROTOCOL_KEY = "mail.store.protocol";

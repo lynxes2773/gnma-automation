@@ -37,89 +37,105 @@ public class AddPoolRunner {
 	
 	public boolean run()
 	{
-		System.out.println("Now accessing Pools & Loans screen....");
-
-		WebElement poolsAndLoansTab = driver.findElementById(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID);
-		poolsAndLoansTab.click();
-
-		WebDriverWait wait = new WebDriverWait(driver, 30, 100);
-		
-		System.out.println("Now initiating adding a pool....");
-		WebElement addPoolButton = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.ADD_POOL_BUTTON_ID)));
-		addPoolButton.click();
-		
-		WebElement fileUploadInputField = driver.findElementById(PoolListScreenConfiguration.ADD_POOL_FILE_FIELD_ID);
-		fileUploadInputField.sendKeys(TestConfiguration.FILE_PATH);
-		
-		WebElement initiateFileUploadBtn = driver.findElementById(PoolListScreenConfiguration.ADD_POOL_FILE_UPLOAD_BUTTON_ID);
-		initiateFileUploadBtn.click();
-		System.out.println("File upload initiated....");
-		
-		
-		WebElement confirmationPopupCloseIcon = wait.until(ExpectedConditions.elementToBeClickable(By.className(PoolListScreenConfiguration.ADD_POOL_CONFIRMATION_POPUP_CLOSE_ICON_CLASSNAME)));
-		confirmationPopupCloseIcon.click();
-		
-		System.out.println("Now switching tabs back & forth to kill time....");
-		WebElement dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
-		dashboardTab.click();
-
-		poolsAndLoansTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID)));
-		poolsAndLoansTab.click();
-		dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
-		dashboardTab.click();
-		
-		poolsAndLoansTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID)));
-		poolsAndLoansTab.click();
-		
-		dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
-		dashboardTab.click();
-		waitForPageLoaded(driver);
-		
-		driver.switchTo().frame(driver.findElement(By.id(DashboardPageConfiguration.FRAME_ID)));
-		
-		System.out.println("Now looking for the Pool ID link....");
-		WebElement poolLink = null;
+		System.out.println("Now accessing Pools & Loans tab....");
 		boolean seleniumExceptionTriggered = false;
+		WebElement poolsAndLoansTab = null;
 		try
 		{
-			poolLink = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Pool "+TestConfiguration.POOL_ID)));
-			System.out.println("SUCCESS: Pool link for "+ TestConfiguration.POOL_ID + " found in first attempt.");
-			String hrefLocation = findByAnchor();
-			driver.get(hrefLocation);
-		}
-		catch(Exception nsee)
-		{
-			System.out.println("WARNING: Pool link for "+ TestConfiguration.POOL_ID + " NOT found.");
-			System.out.println("Switching tabs again to refresh...");
-			seleniumExceptionTriggered = true;
-		}
-		
-		if(seleniumExceptionTriggered)
-		{
-			seleniumExceptionTriggered = false;
-			driver.switchTo().defaultContent();
 			poolsAndLoansTab = driver.findElementById(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID);
 			poolsAndLoansTab.click();
-			dashboardTab = driver.findElementById(PoolListScreenConfiguration.DASHBOARD_TAB_ID);
+		}
+		catch(Exception e)
+		{
+			/**
+			 * Pools & Loans tab was not found on the Dashboard, which probably means this user doesn't have access to the SFPDM application
+			 */
+			System.out.println("ERROR: Pools & Loans tab not found. User does not have access to SFPDM application.");
+			seleniumExceptionTriggered = true;
+		}
+
+		if(!seleniumExceptionTriggered)
+		{	
+			/**
+			 * So far so good, user has access to SFPDM application
+			 */
+			WebDriverWait wait = new WebDriverWait(driver, 30, 100);
+			
+			System.out.println("Now initiating adding a pool....");
+			WebElement addPoolButton = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.ADD_POOL_BUTTON_ID)));
+			addPoolButton.click();
+			
+			WebElement fileUploadInputField = driver.findElementById(PoolListScreenConfiguration.ADD_POOL_FILE_FIELD_ID);
+			fileUploadInputField.sendKeys(TestConfiguration.FILE_PATH);
+			
+			WebElement initiateFileUploadBtn = driver.findElementById(PoolListScreenConfiguration.ADD_POOL_FILE_UPLOAD_BUTTON_ID);
+			initiateFileUploadBtn.click();
+			System.out.println("File upload initiated....");
+			
+			
+			WebElement confirmationPopupCloseIcon = wait.until(ExpectedConditions.elementToBeClickable(By.className(PoolListScreenConfiguration.ADD_POOL_CONFIRMATION_POPUP_CLOSE_ICON_CLASSNAME)));
+			confirmationPopupCloseIcon.click();
+			
+			System.out.println("Now switching tabs back & forth to kill time....");
+			WebElement dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
+			dashboardTab.click();
+	
+			poolsAndLoansTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID)));
+			poolsAndLoansTab.click();
+			dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
+			dashboardTab.click();
+			
+			poolsAndLoansTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID)));
+			poolsAndLoansTab.click();
+			
+			dashboardTab = wait.until(ExpectedConditions.elementToBeClickable(By.id(PoolListScreenConfiguration.DASHBOARD_TAB_ID)));
 			dashboardTab.click();
 			waitForPageLoaded(driver);
+			
 			driver.switchTo().frame(driver.findElement(By.id(DashboardPageConfiguration.FRAME_ID)));
+			
+			System.out.println("Now looking for the Pool ID link....");
+			WebElement poolLink = null;
 			try
 			{
-				
 				poolLink = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Pool "+TestConfiguration.POOL_ID)));
-				System.out.println("SUCCESS: Pool link for "+ TestConfiguration.POOL_ID + " found in second attempt.");
+				System.out.println("SUCCESS: Pool link for "+ TestConfiguration.POOL_ID + " found in first attempt.");
 				String hrefLocation = findByAnchor();
-				System.out.println("Now accessing Pools details screen....");
-
 				driver.get(hrefLocation);
 			}
 			catch(Exception nsee)
 			{
+				System.out.println("WARNING: Pool link for "+ TestConfiguration.POOL_ID + " NOT found.");
+				System.out.println("Switching tabs again to refresh...");
 				seleniumExceptionTriggered = true;
 			}
+			
+			if(seleniumExceptionTriggered)
+			{
+				seleniumExceptionTriggered = false;
+				driver.switchTo().defaultContent();
+				poolsAndLoansTab = driver.findElementById(DashboardPageConfiguration.POOLS_AND_LOANS_TAB_ID);
+				poolsAndLoansTab.click();
+				dashboardTab = driver.findElementById(PoolListScreenConfiguration.DASHBOARD_TAB_ID);
+				dashboardTab.click();
+				waitForPageLoaded(driver);
+				driver.switchTo().frame(driver.findElement(By.id(DashboardPageConfiguration.FRAME_ID)));
+				try
+				{
+					
+					poolLink = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Pool "+TestConfiguration.POOL_ID)));
+					System.out.println("SUCCESS: Pool link for "+ TestConfiguration.POOL_ID + " found in second attempt.");
+					String hrefLocation = findByAnchor();
+					System.out.println("Now accessing Pools details screen....");
+	
+					driver.get(hrefLocation);
+				}
+				catch(Exception nsee)
+				{
+					seleniumExceptionTriggered = true;
+				}
+			}
 		}
-		
 		if(!seleniumExceptionTriggered)
 		{	
 			poolCreated = true;

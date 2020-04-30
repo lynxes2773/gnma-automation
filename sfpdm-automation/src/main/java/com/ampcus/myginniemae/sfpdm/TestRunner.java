@@ -37,7 +37,7 @@ public class TestRunner {
 			WebElement poolField = wait.until(ExpectedConditions.elementToBeClickable(By.id(TestConfiguration.POOL_FIELD_ID)));
 			poolField.clear();
 			poolField.sendKeys(TestConfiguration.POOL_FIELD_VALUE);
-			System.out.println("Pool field value entered..");
+			System.out.println("Erroneous Pool Maturity Date field value entered..");
 			
 			driver.switchTo().defaultContent();
 			WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PoolDetailsScreenConfigurations.SAVE_BUTTON_XPATH)));
@@ -78,6 +78,7 @@ public class TestRunner {
 				System.out.println("SUCCESS: Pool link for "+ TestConfiguration.POOL_ID + " found in first attempt.");
 				poolLink = util.findElement(PageUtilities.ELEMENT_TYPE_ANCHOR, PageUtilities.QUALIFIER_TYPE_TEXT, "Pool "+TestConfiguration.POOL_ID);
 				driver.get(poolLink.getAttribute("href"));
+				System.out.println("Now viewing pool details screen with error message visible");
 			}
 			catch(Exception nsee)
 			{
@@ -103,6 +104,7 @@ public class TestRunner {
 					System.out.println("SUCCESS: Pool link for "+ TestConfiguration.POOL_ID + " found in second attempt.");
 					poolLink = util.findElement(PageUtilities.ELEMENT_TYPE_ANCHOR, PageUtilities.QUALIFIER_TYPE_TEXT, "Pool "+TestConfiguration.POOL_ID);
 					driver.get(poolLink.getAttribute("href"));
+					System.out.println("Now viewing pool details screen with error message visible");
 				}
 				catch(Exception nsee)
 				{
