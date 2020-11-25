@@ -1,2 +1,2 @@
-# gnma-automation
-Ginnie Mae Portal Automation
+# portal-automation
+Portal Automation
